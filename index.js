@@ -15,17 +15,14 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// API Keys from environment variables
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
 
-// Voice IDs for different hosts
 const VOICES = {
     host1: "21m00Tcm4TlvDq8ikWAM", // Rachel
     host2: "AZnzlk1XvdvUeBnXmlld"  // Domi
 };
 
-// Function to extract text from PDF
 async function extractTextFromPDF(pdfPath) {
     return new Promise((resolve, reject) => {
         const pdfParser = new PDFParser();
@@ -43,7 +40,7 @@ async function extractTextFromPDF(pdfPath) {
     });
 }
 
-// Function to get summary from OpenRouter API
+
 async function getSummary(text) {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
@@ -64,7 +61,7 @@ async function getSummary(text) {
     return data.choices[0].message.content;
 }
 
-// Function to convert text to speech using ElevenLabs API
+
 async function textToSpeech(text, voiceId) {
     const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
         method: 'POST',
@@ -90,7 +87,6 @@ async function textToSpeech(text, voiceId) {
     return Buffer.from(await response.arrayBuffer());
 }
 
-// Function to process the script and create audio
 async function processScript(script, outputFile) {
     const lines = script.split('\n').filter(line => line.trim());
     let currentSpeaker = 'host1';
@@ -98,7 +94,7 @@ async function processScript(script, outputFile) {
 
     console.log('Converting script to speech with multiple voices...');
 
-    // Process each line and append to the output file
+    
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         if (line.trim()) {
@@ -108,11 +104,10 @@ async function processScript(script, outputFile) {
                 try {
                     const audioBuffer = await textToSpeech(text, VOICES[currentSpeaker]);
                     
-                    // For the first line, create or overwrite the file
                     if (i === 0) {
                         await fs.writeFile(outputFile, audioBuffer);
                     } else {
-                        // For subsequent lines, append to the file
+                        
                         const fd = await fs.open(outputFile, 'a');
                         await fd.write(audioBuffer);
                         await fd.close();
@@ -129,10 +124,10 @@ async function processScript(script, outputFile) {
     }
 }
 
-// Main function
+
 async function main() {
     try {
-        // Get command line arguments
+        
         const inputFile = process.argv[2];
         const outputFile = process.argv[3];
 
@@ -145,22 +140,22 @@ async function main() {
         console.log('Input PDF:', path.resolve(inputFile));
         console.log('Output MP3:', path.resolve(outputFile));
 
-        // Extract text from PDF
+        
         console.log('Extracting text from PDF...');
         const text = await extractTextFromPDF(inputFile);
         console.log('Extracted text length:', text.length);
 
-        // Generate interactive script
+     
         console.log('\nGenerating interactive script...');
         console.log('Text to summarize length:', text.length);
         const script = await getSummary(text);
         console.log('Summary length:', script.length);
         
-        // Print the script for debugging
+       
         console.log('\nGenerated Script:');
         console.log(script);
 
-        // Convert script to audio
+      
         await processScript(script, outputFile);
         console.log('\nPodcast created successfully!');
 
