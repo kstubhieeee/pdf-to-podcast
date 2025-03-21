@@ -1,6 +1,6 @@
 # PDF to Podcast Converter
 
-Convert your PDF documents into engaging podcast-style audio content using AI-powered text summarization and natural-sounding voices.
+Convert your PDF documents into engaging interview-style podcast content using AI-powered text summarization and natural-sounding voices.
 
 [![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)](https://github.com/kstubhieeee/pdf-to-podcast)
 [![Node.js](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
@@ -8,9 +8,11 @@ Convert your PDF documents into engaging podcast-style audio content using AI-po
 ## 🌟 Features
 
 - **PDF Text Extraction**: Automatically extracts text from PDF documents
-- **AI-Powered Summarization**: Uses OpenRouter AI (Mixtral-8x7B) to create engaging dialogue scripts
+- **AI-Powered Interview Generation**: Uses OpenRouter AI (Mixtral-8x7B) to create engaging Q&A scripts
 - **Natural Voice Synthesis**: Converts text to speech using ElevenLabs' high-quality voices
-- **Interactive Format**: Creates a dynamic conversation between two hosts
+- **Interactive Q&A Format**: Creates a dynamic interview between two hosts:
+  - Host 1 (Rachel): Asks insightful questions about the content
+  - Host 2 (Domi): Provides detailed, expert answers
 - **Progress Tracking**: Real-time conversion progress monitoring
 - **Error Handling**: Comprehensive error management and reporting
 
@@ -59,9 +61,9 @@ node index.js javascript_basics.pdf javascript_podcast.mp3
 
 ### Voice Settings
 
-The application uses two different voices for an engaging conversation:
-- Host 1: Rachel (ElevenLabs voice ID: "21m00Tcm4TlvDq8ikWAM")
-- Host 2: Domi (ElevenLabs voice ID: "AZnzlk1XvdvUeBnXmlld")
+The application uses two different voices for an engaging interview format:
+- Host 1 (Rachel): Acts as the interviewer, asking questions (ElevenLabs voice ID: "21m00Tcm4TlvDq8ikWAM")
+- Host 2 (Domi): Acts as the expert, providing answers (ElevenLabs voice ID: "AZnzlk1XvdvUeBnXmlld")
 
 You can modify the voice settings in `index.js`:
 ```javascript

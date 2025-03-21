@@ -52,7 +52,14 @@ async function getSummary(text) {
             model: "mistralai/mixtral-8x7b-instruct",
             messages: [{
                 role: "user",
-                content: `Please convert this text into an engaging dialogue script between two podcast hosts. Make it conversational and natural, with each host taking turns to discuss different points. Format the output with "Host 1:" and "Host 2:" prefixes for each line: ${text}`
+                content: `Convert this text into an interview-style podcast script. Host 1 should ask engaging questions about the content, and Host 2 should provide detailed, informative answers. Make it conversational and natural. Each line should start with either "Host 1:" or "Host 2:". Host 1 should focus on asking questions that would help listeners better understand the topic, and Host 2 should provide clear, comprehensive answers. Format example:
+
+Host 1: [Question about a key point]
+Host 2: [Detailed answer explaining the concept]
+Host 1: [Follow-up question to dig deeper]
+Host 2: [Elaborated response with examples]
+
+Here's the text to convert: ${text}`
             }]
         })
     });
